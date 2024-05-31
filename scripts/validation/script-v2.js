@@ -4,8 +4,7 @@ const yaml = require('js-yaml');
 const { execSync } = require('child_process');
 
 // Path to the Markdown file
-const mdPath = '../../spec/asyncapi.md';
-// const mdPath = './test-document.md';
+const mdPath = process.env.MARKDOWN_PATH || '../../spec/asyncapi.md';
 
 // Function to create a full AsyncAPI document from an example
 function createFullDocument(example) {
@@ -23,33 +22,30 @@ function createFullDocument(example) {
 function extractAsyncAPISnippetsWithLineNumbers(mdContent) {
   const snippets = [];
   const lines = mdContent.split('\n');
-  const codeBlockRegex = /^```yaml$/;
+  const codeBlockStartRegex = /^```yaml$/;
+  const codeBlockEndRegex = /^```$/;
   let inCodeBlock = false;
   let codeBlockStart = null;
   let codeLines = [];
 
   lines.forEach((line, index) => {
-    if (codeBlockRegex.test(line.trim())) {
-      if (inCodeBlock) {
-        // End of a code block
-        const yamlContent = codeLines.join('\n').trim();
-        try {
-          const parsedYaml = yaml.load(yamlContent);
-          snippets.push({
-            content: parsedYaml,
-            startLine: codeBlockStart + 1,
-            endLine: index + 1
-          });
-        } catch (error) {
-          console.error(`Failed to parse YAML from lines ${codeBlockStart + 1}-${index + 1}:`, error);
-        }
-        codeLines = [];
-        inCodeBlock = false;
-      } else {
-        // Start of a code block
-        codeBlockStart = index;
-        inCodeBlock = true;
+    if (codeBlockStartRegex.test(line.trim())) {
+      inCodeBlock = true;
+      codeBlockStart = index;
+    } else if (inCodeBlock && codeBlockEndRegex.test(line.trim())) {
+      inCodeBlock = false;
+      const yamlContent = codeLines.join('\n').trim();
+      try {
+        const parsedYaml = yaml.load(yamlContent);
+        snippets.push({
+          content: parsedYaml,
+          startLine: codeBlockStart + 1,
+          endLine: index + 1
+        });
+      } catch (error) {
+        console.error(`Failed to parse YAML from lines ${codeBlockStart + 1}-${index + 1}:`, error);
       }
+      codeLines = [];
     } else if (inCodeBlock) {
       codeLines.push(line);
     }
@@ -64,6 +60,8 @@ async function validateExamples(mdPath) {
   const snippets = extractAsyncAPISnippetsWithLineNumbers(mdContent);
   const tempDir = fs.mkdtempSync(path.join(__dirname, 'temp-'));
 
+  let allValid = true;
+
   try {
     for (const [index, snippet] of snippets.entries()) {
       const fullDoc = createFullDocument(snippet.content);
@@ -75,15 +73,19 @@ async function validateExamples(mdPath) {
         console.log(`\nValidation successful for snippet from lines ${snippet.startLine} to ${snippet.endLine}`);
       } catch (error) {
         console.error(`Validation failed for snippet from lines ${snippet.startLine} to ${snippet.endLine}`);
-        process.exit(1);  // Exit with an error code to fail the CI job
+        allValid = false;
       }
     }
   } finally {
     fs.rmSync(tempDir, { recursive: true, force: true });
   }
+
+  if (!allValid) {
+    process.exit(1); // Exit with an error code if any validation failed
+  }
 }
 
 validateExamples(mdPath).catch((error) => {
   console.error('Validation script failed:', error);
-  process.exit(1);  // Exit with an error code to fail the CI job
+  process.exit(1); // Exit with an error code to fail the CI job
 });
