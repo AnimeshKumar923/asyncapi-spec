@@ -1,0 +1,6 @@
+```yaml
+asyncapi: 3.0.0
+info:
+  title: sample document
+  version: 0.0.0
+```
