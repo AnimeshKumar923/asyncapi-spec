@@ -58,7 +58,7 @@ async function validateExamples(mdPath) {
       }
     }
   } finally {
-    fs.rmSync(tempDir, { recursive: true, force: true });
+    // fs.rmSync(tempDir, { recursive: true, force: true });
   }
 }
 
