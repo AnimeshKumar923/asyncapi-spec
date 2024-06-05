@@ -1,0 +1,25 @@
+{
+  "asyncapi": "3.0.0",
+  "info": {
+    "title": "Example API",
+    "version": "1.0.0",
+    "description": "This is a sample AsyncAPI document"
+  },
+  "servers": {
+    "development": {
+      "host": "localhost:1883",
+      "protocol": "mqtt"
+    }
+  },
+  "channels": {
+    "exampleChannel": {
+      "address": "exampleChannel",
+      "messages": {},
+      "description": "An example channel"
+    }
+  },
+  "operations": {},
+  "components": {
+    "messages": {}
+  }
+}

@@ -1,7 +1,6 @@
 const fs = require('fs');
 const yaml = require('js-yaml');
 const { parse } = require('@asyncapi/parser');
-const marked = require('marked');
 
 // Path to the Markdown file
 const mdPath = '../../spec/asyncapi.md';
