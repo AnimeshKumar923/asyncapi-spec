@@ -86,6 +86,6 @@ updates.forEach(update => {
 });
 
 // Save the updated document
-fs.writeFileSync('updated_asyncapi_v3.json', JSON.stringify(baseDoc, null, 2), 'utf8');
+fs.writeFileSync('updated-doc.json', JSON.stringify(baseDoc, null, 2), 'utf8');
 
 console.log('AsyncAPI v3 document updated successfully!');

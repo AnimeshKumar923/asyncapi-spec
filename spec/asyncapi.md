@@ -952,7 +952,7 @@ This object MAY be extended with [Specification Extensions](#specificationExtens
 
 ##### Operation Trait Object Example
 
-<!-- asyncapi-example-tester:{test:'Operation Traits Object',json_path:'$.operations.sendUserSignUp.traits'} -->
+<!-- asyncapi-example-tester:{"test":"Operation Traits Object","json_path":"$.operations.sendUserSignUp.traits"} -->
 ```json
 {
   "bindings": {
@@ -1001,7 +1001,7 @@ This object MAY be extended with [Specification Extensions](#specificationExtens
 
 ##### Examples
 
-<!-- asyncapi-example-tester:{test:'Operation Reply Address Object',json_path:'$.operations.sendUserSignUp.reply.address'} -->
+<!-- asyncapi-example-tester:{"test":"Operation Reply Address Object","json_path":"$.operations.sendUserSignUp.reply.address"} -->
 ```json
 {
   "description": "Consumer inbox",
@@ -1009,7 +1009,7 @@ This object MAY be extended with [Specification Extensions](#specificationExtens
 }
 ```
 
-<!-- asyncapi-example-tester:{test:'Operation Reply Address Object',json_path:'$.operations.sendUserSignUp.reply.address'} -->
+<!-- asyncapi-example-tester:{"test":"Operation Reply Address Object","json_path":"$.operations.sendUserSignUp.reply.address"} -->
 ```yaml
 description: Consumer Inbox
 location: $message.header#/replyTo
@@ -1029,7 +1029,7 @@ Field Pattern | Type | Description
 
 ##### Parameters Object Example
 
-<!-- asyncapi-example-tester:{test:'Channel Parameters Object',json_path:'$.channels.user'} -->
+<!-- asyncapi-example-tester:{"test":"Channel Parameters Object","json_path":"$.channels.user"} -->
 ```json
 {
   "address": "user/{userId}/signedup",
@@ -1041,7 +1041,7 @@ Field Pattern | Type | Description
 }
 ```
 
-<!-- asyncapi-example-tester:{test:'Channel Parameters Object',json_path:'$.channels.user'} -->
+<!-- asyncapi-example-tester:{"test":"Channel Parameters Object","json_path":"$.channels.user"} -->
 ```yaml
 address: user/{userId}/signedup
 parameters:
@@ -1067,7 +1067,7 @@ This object MAY be extended with [Specification Extensions](#specificationExtens
 
 ##### Parameter Object Example
 
-<!-- asyncapi-example-tester:{test:'Channel Parameter Object',json_path:'$.channels.user'} -->
+<!-- asyncapi-example-tester:{"test":"Channel Parameter Object","json_path":"$.channels.user"} -->
 ```json
 {
   "address": "user/{userId}/signedup",
@@ -1080,7 +1080,7 @@ This object MAY be extended with [Specification Extensions](#specificationExtens
 }
 ```
 
-<!-- asyncapi-example-tester:{test:'Channel Parameter Object',json_path:'$.channels.user'} -->
+<!-- asyncapi-example-tester:{"test":"Channel Parameter Object","json_path":"$.channels.user"} -->
 ```yaml
 address: user/{userId}/signedup
 parameters:
@@ -1233,7 +1233,7 @@ Field Name | Type | Description
 
 This object MAY be extended with [Specification Extensions](#specificationExtensions).
 
-<!-- asyncapi-example-tester:{test:'Message Object',json_path:'$.components.messages.userSignedUp'} -->
+<!-- asyncapi-example-tester:{"test":"Message Object","json_path":"$.components.messages.userSignedUp"} -->
 ##### Message Object Example
 
 ```json
@@ -1300,7 +1300,7 @@ This object MAY be extended with [Specification Extensions](#specificationExtens
 }
 ```
 
-<!-- asyncapi-example-tester:{test:'Message Object',json_path:'$.components.messages.userSignedUp'} -->
+<!-- asyncapi-example-tester:{"test":"Message Object","json_path":"$.components.messages.userSignedUp"} -->
 ```yaml
 name: UserSignup
 title: User signup
@@ -1347,7 +1347,7 @@ examples:
 
 Example using Avro to define the payload:
 
-<!-- asyncapi-example-tester:{test:'Message Object',json_path:'$.components.messages.userSignedUp'} -->
+<!-- asyncapi-example-tester:{"test":"Message Object","json_path":"$.components.messages.userSignedUp"} -->
 ```json
 {
   "name": "UserSignup",
