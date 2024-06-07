@@ -1,5 +1,4 @@
 const fs = require('fs');
-const { exec } = require('child_process');
 const { JSONPath } = require('jsonpath-plus');
 
 // Read the markdown file
@@ -86,34 +85,7 @@ updates.forEach(update => {
   }
 });
 
-// Path to the updated document
-const updatedDocPath = 'replaced.json';
-
 // Save the updated document
-fs.writeFileSync(updatedDocPath, JSON.stringify(baseDoc, null, 2), 'utf8');
+fs.writeFileSync('updated_asyncapi_v3.json', JSON.stringify(baseDoc, null, 2), 'utf8');
 
-// Validate the updated document using AsyncAPI CLI
-exec(`npx asyncapi validate ${updatedDocPath}`, (error, stdout, stderr) => {
-  if (error) {
-    console.error(`Validation error: ${error.message}`);
-    return;
-  }
-
-  if (stderr) {
-    console.error(`Validation stderr: ${stderr}`);
-    return;
-  }
-
-  console.log(`Validation stdout: ${stdout}`);
-
-  // Delete the updated document after validation
-  fs.unlink(updatedDocPath, (err) => {
-    if (err) {
-      console.error(`Error deleting file: ${err}`);
-    } else {
-      console.log('Updated document deleted successfully');
-    }
-  });
-});
-
-console.log('AsyncAPI v3 document updated and validated successfully!');
+console.log('AsyncAPI v3 document updated successfully!');

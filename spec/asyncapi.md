@@ -497,7 +497,7 @@ A single server would be described as:
 }
 ```
 
-<!-- asyncapi-example-tester:{test:'Server Object',json_path:'$.servers.production} -->
+<!-- asyncapi-example-tester:{"test":"Server Object","json_path":"$.servers.production"} -->
 ```yaml
 host: kafka.in.mycompany.com:9092
 description: Production Kafka broker.
@@ -507,7 +507,7 @@ protocolVersion: '3.2'
 
 An example of a server that has a `pathname`:
 
-<!-- asyncapi-example-tester:{test:'Server Object with pathname',json_path:'$.servers.production} -->
+<!-- asyncapi-example-tester:{"test":"Server Object with pathname","json_path":"$.servers.production"} -->
 ```json
 {
   "host": "rabbitmq.in.mycompany.com:5672",
@@ -517,7 +517,7 @@ An example of a server that has a `pathname`:
 }
 ```
 
-<!-- asyncapi-example-tester:{test:'Server Object with pathname',json_path:'$.servers.production} -->
+<!-- asyncapi-example-tester:{"test":"Server Object with pathname","json_path":"$.servers.production"} -->
 ```yaml
 host: rabbitmq.in.mycompany.com:5672
 pathname: /production
@@ -542,7 +542,7 @@ This object MAY be extended with [Specification Extensions](#specificationExtens
 
 ##### Server Variable Object Example
 
-<!-- asyncapi-example-tester:{test:'Server Object with Variable Object',json_path:'$.servers.production} -->
+<!-- asyncapi-example-tester:{"test":"Server Object with Variable Object","json_path":"$.servers.production"} -->
 ```json
 {
   "host": "rabbitmq.in.mycompany.com:5672",
@@ -561,7 +561,7 @@ This object MAY be extended with [Specification Extensions](#specificationExtens
 }
 ```
 
-<!-- asyncapi-example-tester:{test:'Server Object with Variable Object',json_path:'$.servers.production} -->
+<!-- asyncapi-example-tester:{"test":"Server Object with Variable Object","json_path":"$.servers.production"} -->
 ```yaml
 host: 'rabbitmq.in.mycompany.com:5672'
 pathname: '/{env}'
@@ -583,14 +583,14 @@ In case a message can't be encoded/decoded using this value, schema parsers MUST
 
 ##### Default Content Type Example
 
-<!-- asyncapi-example-tester:{test:'Default Content Type at root doc',json_path:'$'} -->
+<!-- asyncapi-example-tester:{"test":"Default Content Type at root doc","json_path":"$"} -->
 ```json
 {
   "defaultContentType": "application/json"
 }
 ```
 
-<!-- asyncapi-example-tester:{test:'Default Content Type at root doc',json_path:'$'} -->
+<!-- asyncapi-example-tester:{"test":"Default Content Type at root doc","json_path":"$"} -->
 ```yaml
 defaultContentType: application/json
 ```
@@ -607,7 +607,7 @@ Field Pattern | Type | Description
 
 ##### Channels Object Example
 
-<!-- asyncapi-example-tester:{test:'Channels Object',json_path:'$.channels'} -->
+<!-- asyncapi-example-tester:{"test":"Channels Object","json_path":"$.channels"} -->
 ```json
 {
   "userSignedUp": {
@@ -621,7 +621,7 @@ Field Pattern | Type | Description
 }
 ```
 
-<!-- asyncapi-example-tester:{test:'Channels Object',json_path:'$.channels'} -->
+<!-- asyncapi-example-tester:{"test":"Channels Object","json_path":"$.channels"} -->
 ```yaml
 userSignedUp:
   address: 'user.signedup'
@@ -653,7 +653,7 @@ This object MAY be extended with [Specification Extensions](#specificationExtens
 
 ##### Channel Object Example
 
-<!-- asyncapi-example-tester:{test:'Channel Object',json_path:'$.channels.user'} -->
+<!-- asyncapi-example-tester:{"test":"Channel Object","json_path":"$.channels.user"} -->
 ```json
 {
   "address": "users.{userId}",
@@ -695,7 +695,7 @@ This object MAY be extended with [Specification Extensions](#specificationExtens
 }
 ```
 
-<!-- asyncapi-example-tester:{test:'Channel Object',json_path:'$.channels.user'} -->
+<!-- asyncapi-example-tester:{"test":"Channel Object","json_path":"$.channels.user"} -->
 ```yaml
 address: 'users.{userId}'
 title: Users channel
@@ -742,7 +742,7 @@ Field Pattern | Type | Description
 
 ##### Messages Object Example
 
-<!-- asyncapi-example-tester:{test:'Messages Object',json_path:'$.channels.user.messages'} -->
+<!-- asyncapi-example-tester:{"test":"Messages Object","json_path":"$.channels.user.messages"} -->
 ```json
 {
   "userSignedUp": {
@@ -754,7 +754,7 @@ Field Pattern | Type | Description
 }
 ```
 
-<!-- asyncapi-example-tester:{test:'Messages Object',json_path:'$.channels.user.messages'} -->
+<!-- asyncapi-example-tester:{"test":"Messages Object","json_path":"$.channels.user.messages"} -->
 ```yaml
 userSignedUp:
   $ref: '#/components/messages/userSignedUp'
@@ -776,7 +776,7 @@ Field Pattern | Type | Description
 
 ##### Operations Object Example
 
-<!-- asyncapi-example-tester:{test:'Operations Object',json_path:'$.operations'} -->
+<!-- asyncapi-example-tester:{"test":"Operations Object","json_path":"$.operations"} -->
 ```json
 {
   "onUserSignUp": {
@@ -804,7 +804,8 @@ Field Pattern | Type | Description
 }
 ```
 
-<!-- asyncapi-example-tester:{test:'Operations Object',json_path:'$.operations'} -->
+<!-- asyncapi-example-tester:{"test":"Operations Object","json_path":"$.operations"} -->
+
 ```yaml
 onUserSignUp:
   title: User sign up
@@ -847,7 +848,7 @@ Field Name | Type | Description
 
 This object MAY be extended with [Specification Extensions](#specificationExtensions).
 
-<!-- asyncapi-example-tester:{test:'Operation Object',json_path:'$.operations.sendUserSignUp'} -->
+<!-- asyncapi-example-tester:{"test":"Operation Object","json_path":"$.operations.sendUserSignUp"} -->
 ##### Operation Object Example
 
 ```json
@@ -897,7 +898,7 @@ This object MAY be extended with [Specification Extensions](#specificationExtens
 }
 ```
 
-<!-- asyncapi-example-tester:{test:'Operation Object',json_path:'$.operations.sendUserSignUp'} -->
+<!-- asyncapi-example-tester:{"test":"Operation Object","json_path":"$.operations.sendUserSignUp"} -->
 ```yaml
 title: User sign up
 summary: Action to sign a user up.
@@ -962,7 +963,7 @@ This object MAY be extended with [Specification Extensions](#specificationExtens
 }
 ```
 
-<!-- asyncapi-example-tester:{test:'Operation Traits Object',json_path:'$.operations.sendUserSignUp.traits'} -->
+<!-- asyncapi-example-tester:{"test":"Operation Traits Object","json_path":"$.operations.sendUserSignUp.traits"} -->
 ```yaml
 bindings:
   amqp:
