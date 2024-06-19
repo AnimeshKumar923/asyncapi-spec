@@ -2,12 +2,12 @@ const fs = require('fs');
 const yaml = require('js-yaml');
 const { Parser } = require('@asyncapi/parser');
 const mergePatch = require('json-merge-patch');
-// const jsonpointer = require('jsonpointer');
+const jsonpointer = require('jsonpointer');
 const parser = new Parser();
 
 // Read the markdown file
-// const markdownContent = fs.readFileSync('./asyncapi-json-pointer.md', 'utf8');
-const markdownContent = fs.readFileSync('../../spec/asyncapi.md', 'utf8');
+const markdownContent = fs.readFileSync('./asyncapi-json-pointer.md', 'utf8');
+// const markdownContent = fs.readFileSync('../../spec/asyncapi.md', 'utf8');
 
 // Function to extract comments and examples from the markdown content
 function extractCommentsAndExamples(content) {
