@@ -2,9 +2,11 @@ const fs = require('fs');
 const yaml = require('js-yaml');
 const { Parser } = require('@asyncapi/parser');
 const mergePatch = require('json-merge-patch');
+// const jsonpointer = require('jsonpointer');
 const parser = new Parser();
 
 // Read the markdown file
+// const markdownContent = fs.readFileSync('./asyncapi-json-pointer.md', 'utf8');
 const markdownContent = fs.readFileSync('../../spec/asyncapi.md', 'utf8');
 
 // Function to extract comments and examples from the markdown content
@@ -18,8 +20,6 @@ function extractCommentsAndExamples(content) {
       const json = JSON.parse(match[1]);
       const format = match[2].trim();
       const exampleContent = match[3].trim();
-
-      // console.log(`Extracted example in format: ${format}`);
 
       let example;
       if (format === 'json') {
@@ -56,22 +56,10 @@ function applyUpdates(updates, baseDoc) {
         // Apply patch directly at the root
         baseDoc = mergePatch.apply(baseDoc, update.example);
       } else {
-        // Apply patch at a specified path
-        const pathParts = update.json_path.split('.').slice(1);
-        let current = baseDoc;
-
-        // Traverse the path, creating objects as needed
-        for (let i = 0; i < pathParts.length - 1; i++) {
-          const part = pathParts[i];
-          if (!current[part]) {
-            current[part] = {};
-          }
-          current = current[part];
-        }
-
-        // Apply the patch at the final path
-        const finalPart = pathParts[pathParts.length - 1];
-        current[finalPart] = mergePatch.apply(current[finalPart] || {}, update.example);
+        // Apply patch at a specified JSON Pointer path
+        const targetObject = jsonpointer.get(baseDoc, update.json_path);
+        const patchedObject = mergePatch.apply(targetObject || {}, update.example);
+        jsonpointer.set(baseDoc, update.json_path, patchedObject);
       }
     } catch (e) {
       console.error(`\nError processing update for '${update.name}' at path '${update.json_path}'`, e);
