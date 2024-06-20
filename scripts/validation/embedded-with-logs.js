@@ -55,18 +55,18 @@ function applyUpdates(updates, baseDoc) {
       const targetKey = jsonPointerPath.split('/').pop();
       const parentObject = jsonpointer.get(baseDoc, parentPath) || {};
 
-      // Check if the target key is "examples" and handle it as an array
-      if (targetKey === "examples") {
-        if (!Array.isArray(parentObject[targetKey])) {
-          parentObject[targetKey] = [];
-        }
-        parentObject[targetKey].push(update.example);
+      // Check if the target key points to an array
+      if (Array.isArray(parentObject[targetKey])) {
+        // Apply patch inside the array
+        parentObject[targetKey] = parentObject[targetKey].map((item) => {
+          if (item.name === update.example.name) {
+            return mergePatch.apply(item, update.example);
+          }
+          return item;
+        });
       } else {
-        if (jsonPointerPath === "") {
-          baseDoc = mergePatch.apply(baseDoc, update.example);
-        } else {
-          parentObject[targetKey] = mergePatch.apply(parentObject[targetKey] || {}, update.example);
-        }
+        // Apply regular merge if not an array
+        parentObject[targetKey] = mergePatch.apply(parentObject[targetKey] || {}, update.example);
       }
 
       jsonpointer.set(baseDoc, parentPath, parentObject);
