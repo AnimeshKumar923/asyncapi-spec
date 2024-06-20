@@ -51,6 +51,14 @@ function applyUpdates(updates, baseDoc) {
   updates.forEach(update => {
     try {
       const jsonPointerPath = update.json_pointer;
+
+      // Handle root document case
+      if (jsonPointerPath === '') {
+        baseDoc = mergePatch.apply(baseDoc, update.example);
+        return;
+      }
+
+
       const parentPath = jsonPointerPath.replace(/\/[^/]+$/, '') || '/';
       const targetKey = jsonPointerPath.split('/').pop();
       const parentObject = jsonpointer.get(baseDoc, parentPath) || {};
