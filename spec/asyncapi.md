@@ -1610,7 +1610,7 @@ my.org.User
 
 ##### Components Object Example
 
-<!-- asyncapi-example-tester:{"name":"Components Object","json_pointer":"/components"} -->
+<!-- asyncapi-example-tester:{"name":"Components Object","json_pointer":""} -->
 ```json
 {
   "components": {
@@ -1744,7 +1744,7 @@ my.org.User
 }
 ```
 
-<!-- asyncapi-example-tester:{"name":"Components Object","json_pointer":"/components"} -->
+<!-- asyncapi-example-tester:{"name":"Components Object","json_pointer":""} -->
 ```yaml
 components:
   schemas:
