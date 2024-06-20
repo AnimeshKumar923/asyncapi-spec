@@ -434,24 +434,7 @@
         "bindings": {
           "$ref": "#/components/messageBindings/user"
         },
-        "examples": [
-          {
-            "name": "SimpleSignup",
-            "summary": "A simple UserSignup example message",
-            "headers": {
-              "correlationId": "my-correlation-id",
-              "applicationInstanceId": "myInstanceId"
-            },
-            "payload": {
-              "user": {
-                "someUserKey": "someUserValue"
-              },
-              "signup": {
-                "someSignupKey": "someSignupValue"
-              }
-            }
-          }
-        ]
+        "examples": []
       },
       "userSignedUp": {
         "name": "UserSignup",

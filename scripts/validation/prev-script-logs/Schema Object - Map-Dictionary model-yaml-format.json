@@ -239,9 +239,6 @@
           "id": {
             "type": "integer",
             "format": "int64"
-          },
-          "name": {
-            "type": "string"
           }
         }
       },
@@ -260,8 +257,7 @@
               "name": "name",
               "type": "string"
             }
-          ],
-          "$ref": "path/to/user-create.avsc#/UserCreate"
+          ]
         }
       },
       "userCreate": {
@@ -361,22 +357,16 @@
           }
         }
       },
-      "Tag": {
+      "Additional": {
         "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "name": {
-            "type": "string"
-          }
+        "additionalProperties": {
+          "type": "string"
         }
       }
     },
     "servers": {
       "development": {
-        "host": "{stage}.in.mycompany.com:{port}",
+        "host": "{stage}.in.mycompany.com",
         "protocol": "amqp",
         "description": "RabbitMQ broker",
         "bindings": {
@@ -385,30 +375,19 @@
         "variables": {
           "stage": {
             "$ref": "#/components/serverVariables/stage"
-          },
-          "port": {
-            "$ref": "#/components/serverVariables/port"
           }
         },
         "security": [
           {
             "$ref": "#/components/securitySchemes/oauth"
           }
-        ],
-        "protocolVersion": "0-9-1"
+        ]
       }
     },
     "serverVariables": {
       "stage": {
         "default": "demo",
-        "description": "This value is assigned by the service provider, in this example `mycompany.com`"
-      },
-      "port": {
-        "enum": [
-          "5671",
-          "5672"
-        ],
-        "default": "5672"
+        "description": "This value is assigned by the service provider in this example of `mycompany.com`"
       }
     },
     "channels": {
@@ -442,13 +421,6 @@
         "externalDocs": {
           "$ref": "#/components/externalDocs/infoDocs"
         }
-      },
-      "user/signedup": {
-        "subscribe": {
-          "message": {
-            "$ref": "#/components/messages/userSignUp"
-          }
-        }
       }
     },
     "messages": {
@@ -460,16 +432,7 @@
           }
         ],
         "payload": {
-          "$ref": "#/components/schemas/Category",
-          "type": "object",
-          "properties": {
-            "user": {
-              "$ref": "#/components/schemas/userCreate"
-            },
-            "signup": {
-              "$ref": "#/components/schemas/signup"
-            }
-          }
+          "$ref": "#/components/schemas/Category"
         },
         "correlationId": {
           "$ref": "#/components/correlationIds/default"
@@ -477,25 +440,7 @@
         "bindings": {
           "$ref": "#/components/messageBindings/user"
         },
-        "examples": [],
-        "description": "Multiline description of what this action does.\nHere you have another line.\n",
-        "tags": [
-          {
-            "name": "user"
-          },
-          {
-            "name": "signup"
-          }
-        ],
-        "headers": {
-          "type": "object",
-          "properties": {
-            "applicationInstanceId": {
-              "description": "Unique identifier for a given instance of the publishing application",
-              "type": "string"
-            }
-          }
-        }
+        "examples": []
       },
       "userSignedUp": {
         "name": "UserSignup",

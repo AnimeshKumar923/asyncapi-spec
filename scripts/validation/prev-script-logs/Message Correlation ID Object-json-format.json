@@ -228,15 +228,7 @@
           }
         ]
       },
-      "traits": [
-        {
-          "bindings": {
-            "amqp": {
-              "ack": false
-            }
-          }
-        }
-      ]
+      "traits": []
     }
   },
   "components": {
