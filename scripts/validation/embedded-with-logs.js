@@ -37,7 +37,6 @@ function extractCommentsAndExamples(content) {
       });
     } catch (e) {
       console.error("Failed to parse comment JSON or example:", match[1], e);
-      // process.exit(1);
     }
   }
 
@@ -51,18 +50,28 @@ const combinedData = extractCommentsAndExamples(markdownContent);
 function applyUpdates(updates, baseDoc) {
   updates.forEach(update => {
     try {
-      if (update.json_pointer === "") {
-        // Apply patch directly at the root
-        baseDoc = mergePatch.apply(baseDoc, update.example);
+      const jsonPointerPath = update.json_pointer;
+      const parentPath = jsonPointerPath.replace(/\/[^/]+$/, '') || '/';
+      const targetKey = jsonPointerPath.split('/').pop();
+      const parentObject = jsonpointer.get(baseDoc, parentPath) || {};
+
+      // Check if the target key is "examples" and handle it as an array
+      if (targetKey === "examples") {
+        if (!Array.isArray(parentObject[targetKey])) {
+          parentObject[targetKey] = [];
+        }
+        parentObject[targetKey].push(update.example);
       } else {
-        // Apply patch at a specified JSON Pointer path
-        const targetObject = jsonpointer.get(baseDoc, update.json_pointer);
-        const patchedObject = mergePatch.apply(targetObject || {}, update.example);
-        jsonpointer.set(baseDoc, update.json_pointer, patchedObject);
+        if (jsonPointerPath === "") {
+          baseDoc = mergePatch.apply(baseDoc, update.example);
+        } else {
+          parentObject[targetKey] = mergePatch.apply(parentObject[targetKey] || {}, update.example);
+        }
       }
+
+      jsonpointer.set(baseDoc, parentPath, parentObject);
     } catch (e) {
       console.error(`\nError processing update for '${update.name}' at path '${update.json_pointer}'`, e);
-      // process.exit(1);
     }
   });
   return baseDoc;
@@ -89,18 +98,17 @@ async function validateParser(document, name) {
   }
 }
 
-
 // Function to log document to a file
 function logDocument(document, name, stage) {
   const filePath = `./embed-logs/${name}-${stage}.json`;
   fs.writeFileSync(filePath, JSON.stringify(document, null, 2));
   console.log(`${filePath}`);
 }
+
 // Create logs directory if it doesn't exist
 if (!fs.existsSync('./embed-logs')) {
   fs.mkdirSync('./embed-logs');
 }
-
 
 // Iterate over the combinedData array, apply updates, and validate each document
 const baseDocPath = './base-doc.json';
@@ -130,5 +138,4 @@ Promise.all(validationPromises)
   })
   .catch((error) => {
     console.error('Error during validations:', error);
-    // process.exit(1);
   });
