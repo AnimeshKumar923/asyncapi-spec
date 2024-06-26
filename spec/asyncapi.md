@@ -2423,21 +2423,21 @@ This object MAY be extended with [Specification Extensions](#specificationExtens
 
 ###### User/Password Authentication Sample
 
-<!-- asyncapi-example-tester:{"name":"Security Scheme Object - user-pass","json_pointer":"#/components/securitySchemes/oauth"} -->
+<!-- asyncapi-example-tester:{"name":"Security Scheme Object - user-pass","json_pointer":"#/components/securitySchemes/userPasswordAuth"} -->
 ```json
 {
   "type": "userPassword"
 }
 ```
 
-<!-- asyncapi-example-tester:{"name":"Security Scheme Object - user-pass","json_pointer":"#/components/securitySchemes/oauth"} -->
+<!-- asyncapi-example-tester:{"name":"Security Scheme Object - user-pass","json_pointer":"#/components/securitySchemes/userPasswordAuth"} -->
 ```yaml
 type: userPassword
 ```
 
 ###### API Key Authentication Sample
 
-<!-- asyncapi-example-tester:{"name":"Security Scheme Object - API key auth","json_pointer":"#/components/securitySchemes/oauth"} -->
+<!-- asyncapi-example-tester:{"name":"Security Scheme Object - API key auth","json_pointer":"#/components/securitySchemes/apiKeyAuth"} -->
 ```json
 {
   "type": "apiKey",
@@ -2445,7 +2445,7 @@ type: userPassword
 }
 ```
 
-<!-- asyncapi-example-tester:{"name":"Security Scheme Object - API key auth","json_pointer":"#/components/securitySchemes/oauth"} -->
+<!-- asyncapi-example-tester:{"name":"Security Scheme Object - API key auth","json_pointer":"#/components/securitySchemes/apiKeyAuth"} -->
 ```yaml
 type: apiKey
 in: user
@@ -2453,35 +2453,35 @@ in: user
 
 ###### X.509 Authentication Sample
 
-<!-- asyncapi-example-tester:{"name":"Security Scheme Object - X.509","json_pointer":"#/components/securitySchemes/oauth"} -->
+<!-- asyncapi-example-tester:{"name":"Security Scheme Object - X.509","json_pointer":"#/components/securitySchemes/X509Auth"} -->
 ```json
 {
   "type": "X509"
 }
 ```
 
-<!-- asyncapi-example-tester:{"name":"Security Scheme Object - X.509","json_pointer":"#/components/securitySchemes/oauth"} -->
+<!-- asyncapi-example-tester:{"name":"Security Scheme Object - X.509","json_pointer":"#/components/securitySchemes/X509Auth"} -->
 ```yaml
 type: X509
 ```
 
 ###### End-to-end Encryption Authentication Sample
 
-<!-- asyncapi-example-tester:{"name":"Security Scheme Object - end to end encryption","json_pointer":"#/components/securitySchemes/oauth"} -->
+<!-- asyncapi-example-tester:{"name":"Security Scheme Object - end to end encryption","json_pointer":"#/components/securitySchemes/symmetricEncryptionAuth"} -->
 ```json
 {
   "type": "symmetricEncryption"
 }
 ```
 
-<!-- asyncapi-example-tester:{"name":"Security Scheme Object - end to end encryption","json_pointer":"#/components/securitySchemes/oauth"} -->
+<!-- asyncapi-example-tester:{"name":"Security Scheme Object - end to end encryption","json_pointer":"#/components/securitySchemes/symmetricEncryptionAuth"} -->
 ```yaml
 type: symmetricEncryption
 ```
 
 ###### Basic Authentication Sample
 
-<!-- asyncapi-example-tester:{"name":"Security Scheme Object - basic","json_pointer":"#/components/securitySchemes/oauth"} -->
+<!-- asyncapi-example-tester:{"name":"Security Scheme Object - basic","json_pointer":"#/components/securitySchemes/basicAuth"} -->
 ```json
 {
   "type": "http",
@@ -2489,7 +2489,7 @@ type: symmetricEncryption
 }
 ```
 
-<!-- asyncapi-example-tester:{"name":"Security Scheme Object - basic","json_pointer":"#/components/securitySchemes/oauth"} -->
+<!-- asyncapi-example-tester:{"name":"Security Scheme Object - basic","json_pointer":"#/components/securitySchemes/basicAuth"} -->
 ```yaml
 type: http
 scheme: basic
@@ -2497,7 +2497,7 @@ scheme: basic
 
 ###### API Key Sample
 
-<!-- asyncapi-example-tester:{"name":"Security Scheme Object - API key","json_pointer":"#/components/securitySchemes/oauth"} -->
+<!-- asyncapi-example-tester:{"name":"Security Scheme Object - API key","json_pointer":"#/components/securitySchemes/httpApiAuth"} -->
 ```json
 {
   "type": "httpApiKey",
@@ -2506,7 +2506,7 @@ scheme: basic
 }
 ```
 
-<!-- asyncapi-example-tester:{"name":"Security Scheme Object - API key","json_pointer":"#/components/securitySchemes/oauth"} -->
+<!-- asyncapi-example-tester:{"name":"Security Scheme Object - API key","json_pointer":"#/components/securitySchemes/httpApiAuth"} -->
 ```yaml
 type: httpApiKey
 name: api_key
@@ -2515,7 +2515,7 @@ in: header
 
 ###### JWT Bearer Sample
 
-<!-- asyncapi-example-tester:{"name":"Security Scheme Object - JWT","json_pointer":"#/components/securitySchemes/oauth"} -->
+<!-- asyncapi-example-tester:{"name":"Security Scheme Object - JWT","json_pointer":"#/components/securitySchemes/JWTAuth"} -->
 ```json
 {
   "type": "http",
@@ -2524,7 +2524,7 @@ in: header
 }
 ```
 
-<!-- asyncapi-example-tester:{"name":"Security Scheme Object - JWT","json_pointer":"#/components/securitySchemes/oauth"} -->
+<!-- asyncapi-example-tester:{"name":"Security Scheme Object - JWT","json_pointer":"#/components/securitySchemes/JWTAuth"} -->
 ```yaml
 type: http
 scheme: bearer
@@ -2567,14 +2567,14 @@ scopes:
 
 ###### SASL Sample
 
-<!-- asyncapi-example-tester:{"name":"Security Scheme Object - SASL","json_pointer":"#/components/securitySchemes/oauth"} -->
+<!-- asyncapi-example-tester:{"name":"Security Scheme Object - SASL","json_pointer":"#/components/securitySchemes/saslAuth"} -->
 ```json
 {
   "type": "scramSha512"
 }
 ```
 
-<!-- asyncapi-example-tester:{"name":"Security Scheme Object - SASL","json_pointer":"#/components/securitySchemes/oauth"} -->
+<!-- asyncapi-example-tester:{"name":"Security Scheme Object - SASL","json_pointer":"#/components/securitySchemes/saslAuth"} -->
 ```yaml
 type: scramSha512
 ```
@@ -2614,7 +2614,6 @@ This object MAY be extended with [Specification Extensions](#specificationExtens
 <!-- asyncapi-example-tester:{"name":"Security Scheme OAuth Flow Object","json_pointer":"#/components/securitySchemes/oauth/flows/clientCredentials"} -->
 ```json
 {
-  "authorizationUrl": "https://example.com/api/oauth/dialog",
   "tokenUrl": "https://example.com/api/oauth/token",
   "availableScopes": {
     "write:pets": "modify pets in your account",
@@ -2622,15 +2621,17 @@ This object MAY be extended with [Specification Extensions](#specificationExtens
   }
 }
 ```
-
+<!-- "authorizationUrl": "https://example.com/api/oauth/dialog", -->
+<!-- validation passes when we remove this line -->
 <!-- asyncapi-example-tester:{"name":"Security Scheme OAuth Flow Object","json_pointer":"#/components/securitySchemes/oauth/flows/clientCredentials"} -->
 ```yaml
-authorizationUrl: https://example.com/api/oauth/dialog
 tokenUrl: https://example.com/api/oauth/token
 availableScopes:
   write:pets: modify pets in your account
   read:pets: read your pets
 ```
+<!-- authorizationUrl: https://example.com/api/oauth/dialog -->
+<!-- validation passes when we remove this line -->
 
 ### <a name="correlationIdObject"></a>Correlation ID Object
 
