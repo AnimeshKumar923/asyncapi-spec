@@ -110,7 +110,7 @@ if (!fs.existsSync('./embed-logs')) {
 }
 
 // Iterate over the combinedData array, apply updates, and validate each document
-const baseDocPath = './base-doc-combined.attempt.json';
+const baseDocPath = './base-doc-combined-attempt.json';
 // const baseDocPath = './base-doc.json';
 // const baseDocSecuritySchemePath = './base-doc-security-scheme-object.json';
 // const baseDocPath = './base-doc-security-scheme-object.json';
